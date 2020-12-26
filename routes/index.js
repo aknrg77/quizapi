@@ -17,4 +17,6 @@ route.get('/profile',verify.verify,profileController.profile);
 
 route.post('/changePass',verify.verify,changeController.change);
 
+route.use('/users',verify.verify, require('./users'));
+
 module.exports = route;

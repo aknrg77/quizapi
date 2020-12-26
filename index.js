@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser')
 const db = require('./config/mongoose');
 
-port = 4000;
+port = 5600;
 
 app.use(bodyParser.urlencoded({
     extended : true
