@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser')
 const db = require('./config/mongoose');
 
-const port = 5600;
+const port = 5600 || process.env.PORT;
 
 const expressLayout = require('express-ejs-layouts');
 
