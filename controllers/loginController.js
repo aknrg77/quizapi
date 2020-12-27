@@ -35,11 +35,15 @@ module.exports.login = async function(req,res){
 
             const token = jwt.sign({_id : user._id},process.env.SECRET_KEY);
             res.setHeader('auth-token',token);
-            return res.status(200).json({
-                message:"Succesfully logged in!!!!!",
-                token:token
+            // return res.status(200).json({
+            //     message:"Succesfully logged in!!!!!",
+            //     token:token
 
-            });
+            // });
+
+            res.redirect('/users/quiz');
+
+            
             
             }
             

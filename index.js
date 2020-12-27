@@ -3,11 +3,20 @@ const app = express();
 const bodyParser = require('body-parser')
 const db = require('./config/mongoose');
 
-port = 5600;
+const port = 5600;
+
+const expressLayout = require('express-ejs-layouts');
+
+app.set('view engine','ejs');
+app.set('views','./views');
 
 app.use(bodyParser.urlencoded({
     extended : true
 }));
+
+app.use(express.static('./assets')); //to access the static files
+// app.use(expressLayout);
+
 
 app.use(bodyParser.json());
 

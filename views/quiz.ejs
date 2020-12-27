@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Quiz</title>
+	
+    <link rel="stylesheet" href="/css/quiz.css" />
+    
+        
+</head>
+
+<body>
+
+	<div id="page-wrap">
+
+		<h1>Quiz</h1>
+		
+		<form action="/users/quiz/answers" method="POST" id ="quiz">
+		
+            <ol>
+                <%questions.map((q,index)=>{%>
+                <li>
+                    <h3 id = "question<%= index %>"> </h3> 
+                        <%option[("option"+index).toString()].map((opt,i)=>{%>
+                    <div>
+                        <input type="radio" name=<%= opt %> value=<%= opt %>/>
+                        <label id="option<%=i %> " for=<%= opt %>><%=opt%></label>
+                    </div>
+                    
+                        <%})%>
+
+                </li>
+                <%})%>
+            
+              
+                
+               
+            
+            </ol>
+            
+            <input type="submit" value="Submit Quiz" />
+		
+		</form>
+	
+	</div>
+   
+
+</body>
+
+<script>
+    var questions = '<%-JSON.stringify(questions)%>'
+    questions = JSON.parse(questions);
+    questions.map((q,index)=>{
+    var quest = document.getElementById("question" + index);
+    quest.innerHTML = q.question;
+    });
+
+    var options = '<%-JSON.stringify(option)%>'
+    options = JSON.parse(options);
+    options.map((q,index)=>{
+    var opt = document.getElementById("option" + index);
+    opt.innerHTML = q;
+    });
+
+</script>
+
+</html>

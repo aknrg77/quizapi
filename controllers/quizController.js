@@ -1,7 +1,6 @@
 const axios = require('axios').default;
 const fs = require('fs');
 const path = require('path');
-var givenAns = [];
 const baseDir = path.join(__dirname,'../answers/ans.json');
 
 module.exports.quiz = async function(req,res){
@@ -18,8 +17,39 @@ module.exports.quiz = async function(req,res){
         fs.writeFile(baseDir,list,function(err) {
             console.log(err);
         });
+       var Options =  {
+        option0 : [],
+        option1 : [],
+        option2 : [],
+        option3 : [],
+        option4 : [],
+        }
 
-        res.send(questions.data.results);
+        Array.prototype.insert = function ( index, item ) {
+            this.splice( index, 0, item );
+        };
+
+        answers.map((ans,ind)=>{
+
+            ans.incorrect_answers.map((a,i)=>{
+                let str = "option" + ind;
+
+                Options[str.toString()].push(a);
+            })
+
+            let index = Math.floor(Math.random() * 4);
+            let ptr = "option" + ind;
+            Options[ptr.toString()].insert(index, ans.correct_answer);
+
+        })
+
+
+        res.render('quiz',{
+            questions : questions.data.results,
+            option : Options
+        });
+
+    
 
     }catch(err){
         console.log(err);
@@ -30,8 +60,8 @@ module.exports.quiz = async function(req,res){
 
 module.exports.answers = async function(req,res){
 
-    givenAns = req.body.givenAns;
-
+     givenAns = Object.keys(req.body);
+     
     const data = fs.readFileSync(baseDir,'utf-8');
    
 

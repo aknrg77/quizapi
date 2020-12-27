@@ -7,6 +7,7 @@ const profileController = require('../controllers/profile');
 const verify = require('../middlewares/verifyToken');
 const changeController = require('../controllers/changeController');
 
+
 route.get('/',homeController.home);
 
 route.post('/signup',signupController.signup);
@@ -17,6 +18,6 @@ route.get('/profile',verify.verify,profileController.profile);
 
 route.post('/changePass',verify.verify,changeController.change);
 
-route.use('/users',verify.verify, require('./users'));
+route.use('/users', require('./users'));
 
 module.exports = route;

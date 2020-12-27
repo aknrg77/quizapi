@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 module.exports.signup = async function(req,res){
     //validation
+
     try{
     const error = await validateSignup(req.body);
     if(error){
@@ -25,7 +26,6 @@ module.exports.signup = async function(req,res){
             const hashedpassword = await bcrypt.hash(req.body.password,salt);
 
         let newUser = await users.create({
-                name :req.body.name,
                 email :req.body.email,
                 password :hashedpassword,
             
