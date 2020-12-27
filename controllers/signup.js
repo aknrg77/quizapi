@@ -31,9 +31,10 @@ module.exports.signup = async function(req,res){
             
             })
 
-            res.status(200).json({
-                message:"Account succesfully registered!!!!"
-            })
+            // res.status(200).json({
+            //     message:"Account succesfully registered!!!!"
+            // })
+            res.redirect('/users/quiz');
 
 
         }
